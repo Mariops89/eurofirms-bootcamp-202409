@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+}
+
+.wall {
+    background-color: red;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    position: absolute;
+    bottom: 823px;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 32px solid transparent;
+    border-bottom: 20px solid black;
+    position: absolute;
+    top: 18px;
+}
+
+.door {
+    width: 10px;
+    height: 15px;
+    border: 1px solid black;
+    position: absolute;
+    top: 73px;
+    left: 27px;
+}
+
+.window-container {
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    background-color: aqua;
+    position: absolute;
+    top: 50px;
+    left: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.window {
+    width: 50%;
+    height: 100%;
+    border: 1px dotted black;
+
+}
+
+.volley-pitch {
+    width: 20px;
+    height: 30px;
+    border: 1px solid black;
+    position: absolute;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    transform: rotateX(180deg);
+}
+
+/* CSS del desafío de hacer un dibujo libre */
+
+.separator {
+    background-color: black;
+    color: white;
+    margin: 12% 0 1% 0;
+    text-align: center;
+}
+
+.umbrella-group {
+    display: block;
+}
+
+.umbrella {
+    display: inline-block;
+}
+
+.umbrella-object {
+    display: inline-block;
+    height: 110px
+}
+
+.umbrella-top {
+    width: 100px;
+    height: 50px;
+    border: 2px solid #555;
+    background: #5cb85c;
+    border-radius: 100px 100px 0 0;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.umbrella-down {
+    position: absolute;
+    background-color: black;
+    /*width: 100%;*/
+    width: 2px;
+    height: 60px;
+    margin-left: 50px;
+    top: 232px;
+}
+
+.umbrella-down-line1 {
+    border-right: 5px;
+    width: 100%;
+    background-color: blue;
+    display: inline-block;
+}
+
+.beach {
+    width: 500px;
+    height: 10px;
+    background-color: burlywood
+}
+
+.sea {
+    width: 500px;
+    height: 120px;
+    background-color: blue
+}
