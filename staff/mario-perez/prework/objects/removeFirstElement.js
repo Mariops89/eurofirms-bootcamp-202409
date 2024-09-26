@@ -1,7 +1,6 @@
 /*
     array.shift()
     elimina el primer elemento, lo devuelve y modifica la longitud
-
 */
 
 function removeFirstElement(object) {

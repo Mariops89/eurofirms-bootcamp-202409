@@ -1,18 +1,18 @@
 /*
-    añadir multiples  elementos 
+    añadir varios elementos 
 */
 
 function addElements(object) {
-    // buscar la ultima posicion -> numbers[2] <- para añadir a partir de ella (el primer elemento añadido estara en numbers [3])
-    // añadir los elementos que estan en el objeto arguments
-    // recorriendo el objecto arguments  añado tantos elementos cuantos haya en el objeto arguments
+    // buscar la ultima posicion para añadir a partir de ella
+    // añadir los elementos que estan en el array arguments
+    // recorriendo el array arguments añado tantos elementos cuantos tenga
     // cantidad de elementos a añadir es arguments.length - 1
     for (var i = 1; i < arguments.length; i++) {
-        //saco el parametro exacto 
+        //asigno el elemento en la posicion i en la variable element
         var element = arguments[i]
-        //introduzco el parametro exacto -> element <- en el objeto
+        //añado una nueva posicion en el objeto donde introduzco el valor de la varable element
         object[object.length] = element
-        //incrementar la longitud -> object.length<-
+        //incrementar la propiedad longitud
         object.length++
     }
 
