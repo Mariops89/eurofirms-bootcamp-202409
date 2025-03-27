@@ -1,0 +1,31 @@
+{
+  "name": "api_ts",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "inspect": "npx tsx --inspect-brk index.ts",
+    "test": "npx tsx logic.test.ts",
+    "compile": "npx tsc --lib es2015,dom --noEmit --esModuleInterop --allowImportingTsExtensions *.ts",
+    "start": "npx tsx index.ts",
+    "test-inspect": "tsx --inspect-brk logic.test.ts",
+    "compile-test": "npm run compile && npm run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.1",
+    "com": "file:../com",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.0"
+  }
+}

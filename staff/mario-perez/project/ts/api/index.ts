@@ -32,7 +32,7 @@ const handleError = (res, error) => {
     else if (error instanceof DuplicityError)
         res.status(409).json({ error: error.constructor.name, message: error.message })
     else if (error instanceof TimeError)
-        res.status(422).json({ error: error.constructor.name, message: error.message })
+        res.status(409).json({ error: error.constructor.name, message: error.message })
     else if (error instanceof SystemError)
         res.status(500).json({ error: error.constructor.name, message: error.message })
     else

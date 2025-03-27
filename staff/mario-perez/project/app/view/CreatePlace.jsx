@@ -4,7 +4,7 @@ import getParkings from "../logic/getParkings.js"
 
 import { useState, useEffect } from 'react'
 
-const { ValidationError, SystemError, NotFoundError, OwnerShipError, DuplicityError } = errors
+const { ValidationError, SystemError, NotFoundError, OwnerShipError, DuplicityError, TimeError } = errors
 
 function CreatePlace(props) {
     console.log('CreatePlace -> render')
@@ -40,7 +40,11 @@ function CreatePlace(props) {
                 .catch(error => {
                     if (error instanceof DuplicityError)
                         alert(error.message)
+                    else if (error instanceof TimeError)
+                        //TODO cambiar mensaje
+                        alert(error.message)
                     else if (error instanceof SystemError)
+                        //TODO cambiar mensaje
                         alert('Hubo un problema. Inténtalo más tarde.')
 
                     console.error(error)
@@ -49,6 +53,7 @@ function CreatePlace(props) {
             if (error instanceof ValidationError)
                 alert(error.message)
             else
+                //TODO cambiar mensaje
                 alert('Hubo un problema. Inténtalo más tarde.')
 
             console.error(error)
@@ -63,6 +68,7 @@ function CreatePlace(props) {
                    /* if (error instanceof DuplicityError)
                     alert (error.message) 
                     else */ if (error instanceof SystemError)
+                        //TODO cambiar mensaje
                         alert('Hubo un problema')
                 })
 
@@ -71,6 +77,7 @@ function CreatePlace(props) {
             if (error instanceof ValidationError) {
                 alert(error.message)
             } else {
+                //TODO cambiar mensaje
                 alert('Hubo un problema')
             }
         }
