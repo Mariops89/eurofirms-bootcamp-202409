@@ -27,7 +27,6 @@ function Home(props) {
                     if (error instanceof NotFoundError)
                         alert(error.message)
                     else if (error instanceof SystemError)
-                        //TODO cambiar mensaje
                         alert('Hubo un problema. Inténtalo más tarde.')
 
                     console.error(error)
@@ -39,7 +38,6 @@ function Home(props) {
                     if (error instanceof NotFoundError)
                         alert(error.message)
                     else if (error instanceof SystemError)
-                        //TODO cambiar mensaje
                         alert('Hubo un problema. Inténtalo más tarde.')
 
                     console.error(error)
@@ -49,7 +47,6 @@ function Home(props) {
             if (error instanceof ValidationError)
                 alert(error.message)
             else
-                //TODO cambiar mensaje
                 alert('Hubo un problema. Inténtalo más tarde.')
 
             console.error(error)
@@ -90,7 +87,6 @@ function Home(props) {
                     if (error instanceof NotFoundError)
                         alert(error.message)
                     else if (error instanceof SystemError)
-                        //TODO cambiar mensaje
                         alert('Hubo un problema. Inténtalo más tarde.')
 
                     console.error(error)
@@ -99,7 +95,6 @@ function Home(props) {
             if (error instanceof ValidationError)
                 alert(error.message)
             else
-                //TODO cambiar mensaje
                 alert('Hubo un problema. Inténtalo más tarde.')
 
             console.error(error)
@@ -118,7 +113,6 @@ function Home(props) {
                     if (error instanceof NotFoundError)
                         alert(error.message)
                     else if (error instanceof SystemError)
-                        //TODO cambiar mensaje
                         alert('Hubo un problema. Inténtalo más tarde.')
 
                     console.error(error)
@@ -127,7 +121,6 @@ function Home(props) {
             if (error instanceof ValidationError)
                 alert(error.message)
             else
-                //TODO cambiar mensaje
                 alert('Hubo un problema. Inténtalo más tarde.')
 
             console.error(error)

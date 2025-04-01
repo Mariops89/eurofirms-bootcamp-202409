@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import getParkings from "../logic/getParkings.js"
 import editPlace from '../logic/editPlace.js'
 
-const { DuplicityError, SystemError, ValidationError } = errors
+const { DuplicityError, SystemError, ValidationError, NotFoundError, TimeError } = errors
 
 function EditPlace(props) {
     console.log('EditPlace -> render')
@@ -53,7 +53,6 @@ function EditPlace(props) {
                    /* if (error instanceof DuplicityError)
                     alert (error.message) 
                     else */ if (error instanceof SystemError)
-                        //TODO cambiar mensaje
                         alert('Hubo un problema')
                 })
 
@@ -62,7 +61,6 @@ function EditPlace(props) {
             if (error instanceof ValidationError) {
                 alert(error.message)
             } else {
-                //TODO cambiar mensaje
                 alert('Hubo un problema')
             }
         }
@@ -91,17 +89,18 @@ function EditPlace(props) {
                 .catch(error => {
                     if (error instanceof DuplicityError)
                         alert(error.message)
-                    if (error instanceof SystemError)
-                        //TODO cambiar mensaje
+                    else if (error instanceof SystemError)
                         alert('Hubo un problema. Inténtalo más tarde')
-
-                    console.error(error)
+                    else if (error instanceof NotFoundError)
+                        alert(error.message)
+                    else if (error instanceof TimeError)
+                        console.error(error)
+                    alert(error.message)
                 })
         } catch (error) {
             if (error instanceof ValidationError)
                 alert(error.message)
             else
-                //TODO cambiar mensaje
                 alert('Hubo un problema. Inténtalo más tarde')
 
             console.error(error)

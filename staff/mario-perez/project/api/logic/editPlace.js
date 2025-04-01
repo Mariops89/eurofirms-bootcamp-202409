@@ -1,7 +1,7 @@
 import { errors, validate } from 'com'
 import { Place, User } from '../data/models.js'
 
-const { SystemError, NotFoundError, DuplicityError, OwnerShipError } = errors
+const { SystemError, NotFoundError, DuplicityError, OwnerShipError, TimeError } = errors
 
 function editPlace(userId, placeId, parkingId, level, space, checkin, checkout, vehicleRegistration) {
     validate.userId(userId)
@@ -37,9 +37,9 @@ function editPlace(userId, placeId, parkingId, level, space, checkin, checkout, 
                     placesFound.forEach(place => {
                         console.log(placesFound)
                         if (place.checkin.getTime() <= checkinObjMils && place.checkout.getTime() >= checkinObjMils)
-                            throw new Error('El checkin se está intentando realizar en un tramo de tiempo ocupado')
+                            throw new TimeError('El checkin se está intentando realizar en un tramo de tiempo ocupado')
                         if (place.checkin.getTime() <= checkoutObjMils && place.checkout.getTime() >= checkoutObjMils)
-                            throw new Error('El checkout se está intentando realizar en un tramo de tiempo ocupado')
+                            throw new TimeError('El checkout se está intentando realizar en un tramo de tiempo ocupado')
                         if (place.checkin.getTime() > checkinObjMils && place.checkout.getTime() < checkoutObjMils)
                             throw new Error('El periodo reservado ya contiene otra reserva')
                     })

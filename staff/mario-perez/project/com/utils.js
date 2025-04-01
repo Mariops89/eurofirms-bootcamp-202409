@@ -1,3 +1,7 @@
+/*import { errors } from './errors.js'
+
+const { DuplicityError, SystemError, ValidationError } = errors*/
+
 function extractPayload(token) {
     const [, payload64,] = token.split('.')
     const payloadJSON = atob(payload64)
@@ -25,9 +29,16 @@ function formatDate(dateString) {
     //return `${day}-${month}-${year}${hours}:${minutes}:${seconds}`;
 }
 
+/*function showAlerts(error, typeError) {
+    if (error instanceof typeError) {
+        alert
+    }
+}*/
+
 const utils = {
     extractPayload,
-    formatDate
+    formatDate,
+    //showAlerts
 }
 
 export default utils
