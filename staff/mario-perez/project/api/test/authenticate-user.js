@@ -1,4 +1,4 @@
-fetch('http://localhost:8080/users/auth', {
+fetch('http://localhost:8082/users/auth', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'

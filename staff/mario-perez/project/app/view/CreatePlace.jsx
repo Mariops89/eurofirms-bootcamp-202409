@@ -3,6 +3,7 @@ import createPlace from "../logic/createPlace.js"
 import getParkings from "../logic/getParkings.js"
 
 import { useState, useEffect } from 'react'
+import getUserVehicleRegistrations from "../logic/getUserVehicleRegistrations.js"
 
 const { ValidationError, SystemError, NotFoundError, OwnerShipError, DuplicityError, TimeError } = errors
 
@@ -17,9 +18,11 @@ function CreatePlace(props) {
     const [levels, setLevels] = useState([])
     const [dateCheckIn, setDateCheckIn] = useState(dateNow)
     const [dateCheckOut, setDateCheckOut] = useState(dateNow)
+    const [vehicleRegistrationOpc, setVehicleRegistrationOpc] = useState([])
 
     useEffect(() => {
         handleGetParking()
+        handleGetVehicleRegistrations()
     }, [])
 
     const handleCreatePlaceSubmit = event => {
@@ -68,6 +71,24 @@ function CreatePlace(props) {
                 })
 
 
+        } catch (error) {
+            if (error instanceof ValidationError) {
+                alert(error.message)
+            } else {
+                alert('Hubo un problema')
+            }
+        }
+    }
+
+    const handleGetVehicleRegistrations = () => {
+        try {
+            getUserVehicleRegistrations()
+                .then((vehicleRegistrationOpc) => setVehicleRegistrationOpc(vehicleRegistrationOpc)
+                )
+                .catch(error => {
+                    if (error instanceof SystemError)
+                        alert('Hubo un problema')
+                })
         } catch (error) {
             if (error instanceof ValidationError) {
                 alert(error.message)
@@ -146,7 +167,12 @@ function CreatePlace(props) {
             <input placeholder="Escribe cuándo sales " type="datetime-local" id="checkout" value={dateCheckOut} onChange={handleSetTimeCheckOut} step="60" />
 
             <label htmlFor="vehicleRegistration">Matrícula</label>
-            <input placeholder="Escribe la matrícula de tu automóvil" type="text" id="vehicleRegistration" />
+            <select name="vehicleRegistration" id="vehicleRegistration">
+                <option value="">Elige una matrícula</option>
+                {vehicleRegistrationOpc.map(vehicleRegistration => (
+                    <option key={vehicleRegistration} value={vehicleRegistration}>{vehicleRegistration}</option>
+                ))}
+            </select>
 
 
             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded m-5" type="submit">Crear</button>

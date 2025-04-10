@@ -16,6 +16,23 @@ function Place(props) {
     const { date: formattedDateCheckout, time: formattedTimeCheckout } = utils.formatDate(place.checkout)
     const { date: formattedDateCheckin, time: formattedTimeCheckin } = utils.formatDate(place.checkin)
 
+    const calculateTotalPrice = () => {
+        const checkinDate = new Date(place.checkin)
+        const checkoutDate = new Date(place.checkout)
+
+        // Calcula la diferencia en minutos
+        const differenceInMinutes = (checkoutDate - checkinDate) / (1000 * 60)
+
+        // Convierte el precio almacenado en la BD (por hora * 100) al precio por minuto
+        const pricePerMinute = (place.parking.price / 100) / 60
+
+
+        // Calcula el precio total
+        return differenceInMinutes * pricePerMinute;
+    };
+
+    const totalPrice = calculateTotalPrice();
+
 
     const handleDeletePlaceClick = () => {
         try {
@@ -58,6 +75,10 @@ function Place(props) {
                     <div className="text-center text-2xl">
                         <h4>Comienza el : {formattedDateCheckin} a las {formattedTimeCheckin}</h4>
                         <h4>Finaliza el : {formattedDateCheckout} a las {formattedTimeCheckout}</h4>
+                    </div>
+
+                    <div className="text-center text-2xl">
+                        <h4>Precio total a pagar:  {totalPrice.toFixed(2)} €</h4>
                     </div>
 
                     <div className="text-center text-2xl">

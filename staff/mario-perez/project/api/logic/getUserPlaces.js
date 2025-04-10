@@ -8,7 +8,7 @@ function getUserPlaces(userId) {
 
     return Promise.all([
         User.findById(userId).lean(),
-        Place.find({ user: userId }, '-user -__v').populate('parking', 'name').lean()
+        Place.find({ user: userId }, '-user -__v').populate('parking', 'name price').lean()
     ])
         .catch(error => { throw new SystemError(error.message) })
         .then(userAndPlaces => {
@@ -16,7 +16,7 @@ function getUserPlaces(userId) {
 
             if (!user) throw new NotFoundError('No existe el usuario')
 
-            places.forEach((place) => {
+            /*places.forEach((place) => {
                 place.id = place._id.toString()
                 delete place._id
 
@@ -26,7 +26,20 @@ function getUserPlaces(userId) {
                 }
             })
 
-            return places
+            return places*/
+
+            const transformedPlaces = places.map(place => {
+                return {
+                    ...place,
+                    id: place._id.toString(),
+                    parking: {
+                        ...place.parking,
+                        id: place.parking._id?.toString(),
+                    }
+                }
+            })
+
+            return transformedPlaces
         })
 }
 

@@ -1,0 +1,1 @@
+curl -X 'GET' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2Nzg0MmJiZTFkMTUyNDk3OTBjOGE1NTciLCJpYXQiOjE3NDQxNDc5OTZ9.JcE_7omiOruaa2LN7ynzd6MPsRXRpnM3Bjto5xhIF8g' http://localhost:8082/places/67842bbe1d15249790c8a557/vehicle-registrations -v

@@ -17,6 +17,7 @@ import getParkings from './logic/getParkings.js'
 import deletePlace from './logic/deletePlace.js'
 import getOnePlace from './logic/getOnePlace.js'
 import editPlace from './logic/editPlace.js'
+import getUserVehicleRegistrations from './logic/getUserVehicleRegistrations.js'
 
 const { MONGO_URL, JWT_SECRET, PORT } = process.env
 
@@ -197,6 +198,17 @@ mongoose.connect(MONGO_URL)
             }
         })
 
+        api.get('/places/:userId/vehicle-registrations', (req, res) => {
+            try {
+                const userId = verifyToken(req)
+
+                getUserVehicleRegistrations(userId)
+                    .then(vehicleRegistrationList => res.json(vehicleRegistrationList))
+                    .catch(error => handleError(res, error))
+            } catch (error) {
+                handleError(res, error)
+            }
+        })
 
 
         api.listen(PORT, () => console.log(`La API está lista para funcionar en el puerto ${PORT}`))
