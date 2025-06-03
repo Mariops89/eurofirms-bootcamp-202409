@@ -1,1 +1,1 @@
-curl -X GET http://localhost:8080/parkings -v
+curl -X GET http://localhost:8082/parkings -v

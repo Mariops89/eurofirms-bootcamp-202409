@@ -18,6 +18,7 @@ import deletePlace from './logic/deletePlace.js'
 import getOnePlace from './logic/getOnePlace.js'
 import editPlace from './logic/editPlace.js'
 import getUserVehicleRegistrations from './logic/getUserVehicleRegistrations.js'
+import createVehicleRegistration from './logic/createVehicleRegistration.js'
 
 const { MONGO_URL, JWT_SECRET, PORT } = process.env
 
@@ -198,12 +199,26 @@ mongoose.connect(MONGO_URL)
             }
         })
 
-        api.get('/places/:userId/vehicle-registrations', (req, res) => {
+        api.get('/vehicles', (req, res) => {
             try {
                 const userId = verifyToken(req)
 
                 getUserVehicleRegistrations(userId)
                     .then(vehicleRegistrationList => res.json(vehicleRegistrationList))
+                    .catch(error => handleError(res, error))
+            } catch (error) {
+                handleError(res, error)
+            }
+        })
+
+        api.post('/vehicles', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
+
+                const registration = req.body.registration
+
+                createVehicleRegistration(userId, registration)
+                    .then(() => res.status(201).send())
                     .catch(error => handleError(res, error))
             } catch (error) {
                 handleError(res, error)

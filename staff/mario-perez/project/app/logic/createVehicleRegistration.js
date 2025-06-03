@@ -1,22 +1,25 @@
-import { errors } from "../../com"
+import { validate, errors } from 'com'
 
 const { SystemError } = errors
-function getUserVehicleRegistrations() {
+
+function createVehicleRegistration(userId, vehicleRegistration) {
+    validate.userId(userId)
+    validate.vehicleRegistration(vehicleRegistration)
 
     return fetch(`${import.meta.env.VITE_API_URL}/vehicles`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            Authorization: `Bearer ${sessionStorage.token}`
+            Authorization: `Bearer ${sessionStorage.token}`,
+            'Content-Type': 'application/json'
         },
+        body: JSON.stringify({ userId, vehicleRegistration })
     })
         .catch(error => { throw new SystemError(error.message) })
         .then(response => {
             const status = response.status
 
-            if (status === 200)
-                return response.json()
-                    .catch(error => { throw new SystemError(error.message) })
-                    .then(places => places)
+            if (status === 201) return
+
             return response.json()
                 .catch(error => { throw new SystemError(error.message) })
                 .then(body => {
@@ -30,4 +33,4 @@ function getUserVehicleRegistrations() {
         })
 }
 
-export default getUserVehicleRegistrations
+export default createVehicleRegistration

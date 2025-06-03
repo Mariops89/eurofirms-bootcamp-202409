@@ -1,5 +1,5 @@
 import mongoose, { mongo } from 'mongoose'
-import { User, Parking, Place } from './models.js'
+import { User, Parking, Place, Vehicle } from './models.js'
 
 mongoose.connect('mongodb://127.0.0.1:27017/project')
     .then(() => User.deleteMany())
@@ -99,6 +99,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/project')
             vehicleRegistration: '4567-DEF'
             //location:
         })
+
+        const vehicle1 = new Vehicle({
+            user: peter._id,
+            vehicleRegistration: "8910-GHI"
+        })
+
         return Promise.all([
             pepito.save(),
             campa.save(),
@@ -109,11 +115,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/project')
             salamero.save(),
             elcarmen.save(),
             place1.save(),
-            place2.save()
+            place2.save(),
+            vehicle1.save()
         ])
     })
     .then(items => {
-        const [pepito, campa, peter, wendy, augusta, grancasa, salamero, elcarmen, place1, place2] = items
+        const [pepito, campa, peter, wendy, augusta, grancasa, salamero, elcarmen, place1, place2, vehicle1] = items
 
         console.log(items)
     })

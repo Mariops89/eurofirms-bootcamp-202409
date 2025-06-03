@@ -1,0 +1,1 @@
+curl -X POST -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2Y4MjAxZDU5YWExZWQ4NGVjYjliZDYiLCJpYXQiOjE3NDQ1NzIzOTZ9.6f0XaTjMj28IZxaFHq1cLQunmb7QMHlHTAFoOgagsFA' -H 'Content-Type: application/json' -d '{"userId": "67f8201d59aa1ed84ecb9bd6", "registration":"4555-XXX"}' http://localhost:8082/vehicles -v

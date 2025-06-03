@@ -4,6 +4,7 @@ import getParkings from "../logic/getParkings.js"
 
 import { useState, useEffect } from 'react'
 import getUserVehicleRegistrations from "../logic/getUserVehicleRegistrations.js"
+import createVehicleRegistration from "../logic/createVehicleRegistration.js"
 
 const { ValidationError, SystemError, NotFoundError, OwnerShipError, DuplicityError, TimeError } = errors
 
@@ -25,7 +26,7 @@ function CreatePlace(props) {
         handleGetVehicleRegistrations()
     }, [])
 
-    const handleCreatePlaceSubmit = event => {
+    /*const handleCreatePlaceSubmit = event => {
         event.preventDefault()
 
         const form = event.target
@@ -36,9 +37,10 @@ function CreatePlace(props) {
         const checkin = form.checkin.value
         const checkout = form.checkout.value
         const vehicleRegistration = form.vehicleRegistration.value
+        const vehicleRegistration2 = form.vehicleRegistration2.value
 
         try {
-            createPlace(parking, level, space, checkin, checkout, vehicleRegistration)
+            createPlace(parking, level, space, checkin, checkout, vehicleRegistration || vehicleRegistration2)
                 .then(() => props.onCreatePlaceSuccess())
                 .catch(error => {
                     if (error instanceof DuplicityError)
@@ -57,7 +59,51 @@ function CreatePlace(props) {
                 alert('Hubo un problema. Inténtalo más tarde.')
             console.error(error)
         }
+    }*/
+
+    const handleCreatePlaceSubmit = (event) => {
+        event.preventDefault()
+
+        const form = event.target
+
+        const parking = form.parking.value
+        const level = Number(form.level.value)
+        const space = form.space.value
+        const checkin = form.checkin.value
+        const checkout = form.checkout.value
+        const vehicleRegistration = form.vehicleRegistration.value
+        const vehicleRegistration2 = form.vehicleRegistration2.value
+        const finalRegistration = vehicleRegistration || vehicleRegistration2
+
+        if (!vehicleRegistration) {
+            alert("Debes ingresar una matrícula")
+            return;
+        }
+
+        // Registrar el vehículo
+        createVehicleRegistration(userId, finalRegistration)
+            .then(() => {
+                //crear la plaza
+                return createPlace(parking, level, space, checkin, checkout, finalRegistration)
+            })
+            .then(() => {
+                props.onCreatePlaceSuccess()
+            })
+            .catch(error => {
+                if (error instanceof DuplicityError || error instanceof TimeError) {
+                    alert(error.message)
+                } else if (error instanceof SystemError) {
+                    alert("Hubo un problema. Inténtalo más tarde.")
+                } else if (error instanceof ValidationError) {
+                    alert(error.message)
+                } else {
+                    alert("Error inesperado.")
+                }
+
+                console.error(error)
+            })
     }
+
 
     const handleGetParking = () => {
         try {
@@ -167,7 +213,8 @@ function CreatePlace(props) {
             <input placeholder="Escribe cuándo sales " type="datetime-local" id="checkout" value={dateCheckOut} onChange={handleSetTimeCheckOut} step="60" />
 
             <label htmlFor="vehicleRegistration">Matrícula</label>
-            <select name="vehicleRegistration" id="vehicleRegistration">
+            <input placeholder="Escribe la matrícula" type="text" id="vehicleRegistration" />
+            <select name="vehicleRegistration2" id="vehicleRegistration2">
                 <option value="">Elige una matrícula</option>
                 {vehicleRegistrationOpc.map(vehicleRegistration => (
                     <option key={vehicleRegistration} value={vehicleRegistration}>{vehicleRegistration}</option>

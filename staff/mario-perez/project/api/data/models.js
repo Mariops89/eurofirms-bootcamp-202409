@@ -1,4 +1,4 @@
-import { Schema, model, Types } from 'mongoose'
+import mongoose, { Schema, model, Types } from 'mongoose'
 
 // const ObjectId = Types.ObjectId
 const { ObjectId } = Types
@@ -7,7 +7,7 @@ const user = new Schema({
     name: {
         type: String,
         required: true,
-        minLenth: 1
+        minLength: 1
     },
     email: {
         type: String,
@@ -108,12 +108,28 @@ const place = new Schema({
         unique: true
     }
 })
+
+const vehicle = new Schema({
+    user: {
+        type: ObjectId,
+        ref: 'User'
+    },
+
+    registration: { // matrícula coche
+        type: String,
+        required: true,
+        unique: true
+    }
+})
+
 const User = model('User', user)
 const Parking = model('Parking', parking)
 const Place = model('Place', place)
+const Vehicle = model('Vehicle', vehicle)
 
 export {
     User,
     Parking,
-    Place
+    Place,
+    Vehicle
 }

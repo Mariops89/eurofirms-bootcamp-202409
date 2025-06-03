@@ -1,4 +1,4 @@
-fetch('http://localhost:8080/parkings', {
+fetch('http://localhost:8082/parkings', {
     method: 'GET'
 })
     .then(response => {
