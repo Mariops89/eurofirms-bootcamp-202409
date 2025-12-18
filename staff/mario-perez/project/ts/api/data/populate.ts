@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
-import { IUser, IParking, IPlace, User, Parking, Place } from "./models.ts"
+import { UserDocType, IParking, IPlace, User, Parking, Place } from "./models"
 
-mongoose.connect('mongodb://127.0.0.1:27017/project')
+mongoose.connect('mongodb://127.0.0.1:27017/project-ts')
     .then(() => User.deleteMany())
     .then(() => Parking.deleteMany())
     .then(() => Place.deleteMany())
@@ -9,28 +9,28 @@ mongoose.connect('mongodb://127.0.0.1:27017/project')
     .then(() => {
 
         // users 
-        const pepito = new User<IUser>({
+        const pepito = new User<Partial<UserDocType>>({
             name: 'Pepito Grillo',
             email: 'pepito@grillo.com',
             username: 'pepitogrillo',
             password: '123123123'
         })
 
-        const campa = new User<IUser>({
+        const campa = new User<Partial<UserDocType>>({
             name: 'Campa Nilla',
             email: 'campa@nilla.com',
             username: 'campanilla',
             password: '123123123'
         })
 
-        const peter = new User<IUser>({
+        const peter = new User<Partial<UserDocType>>({
             name: 'Peter Pan',
             email: 'peter@pan.com',
             username: 'peterpan',
             password: '123123123'
         })
 
-        const wendy = new User<IUser>({
+        const wendy = new User<Partial<UserDocType>>({
             name: 'Wendy Darling',
             email: 'wendy@darling.com',
             username: 'wendydarling',

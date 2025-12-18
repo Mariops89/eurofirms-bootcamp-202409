@@ -1,50 +1,10 @@
-import { Schema, model, Types, ObjectId, FlattenMaps } from "mongoose"
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Place = exports.Parking = exports.User = void 0;
+var mongoose_1 = require("mongoose");
 // const ObjectId = Types.ObjectId
-const { ObjectId } = Schema.Types
-
-type UserDocType = {
-    _id: Types.ObjectId
-    name: string
-    email: string
-    username: string
-    password: string
-    __v: number
-}
-
-type VehicleDocType = {
-    _id: Types.ObjectId
-    user: Types.ObjectId
-    registration: string
-    __v: number
-}
-
-interface IParking {
-    name: string
-    address: string
-    city: string
-    levels: number
-    price: number
-    capacity: number
-}
-
-interface IPlace {
-    parking: Types.ObjectId
-    level: number
-    space: string
-    checkin: Date
-    checkout: Date
-    user: Types.ObjectId
-    vehicleRegistration: string
-    free: boolean
-}
-
-interface IVehicle {
-    user: Types.ObjectId
-    registration: string
-}
-
-const user = new Schema<UserDocType>({
+var ObjectId = mongoose_1.Schema.Types.ObjectId;
+var user = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
@@ -67,116 +27,78 @@ const user = new Schema<UserDocType>({
         required: true,
         minLength: 8
     }
-})
-const parking = new Schema<IParking>({
+});
+var parking = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
         minLength: 1,
         unique: true
     },
-
     address: {
         type: String,
         required: true,
     },
-
     city: {
         type: String,
         required: true,
     },
-
     levels: {
         type: Number,
         required: true,
     },
-
-    price: { // céntimos / min
+    price: {
         type: Number,
         required: true,
     },
-
     capacity: {
         type: Number,
         required: true
     }
-})
-
-const place = new Schema<IPlace>({
+});
+var place = new mongoose_1.Schema({
     parking: {
         type: ObjectId,
         ref: 'Parking',
         required: true
     },
-
     level: {
         type: Number,
         required: true
     },
-
     space: {
         type: String,
         required: true
     },
-
     checkin: {
         type: Date,
         //default: Date.now,
         //get: (date) => date.toLocaleDateString("es-ES"), // getter
         required: true
     },
-
     checkout: {
         type: Date,
         //default: Date.now,
         //get: (date) => date.toLocaleDateString("es-ES"), // getter
         required: true
     },
-
     //location: {
     //    type: ?,
     //    required: true
     //},
-
     user: {
         type: ObjectId,
         ref: 'User'
     },
-
-    vehicleRegistration: { // matrícula coche
+    vehicleRegistration: {
         type: String,
         required: true,
         unique: true
     }
-})
-
-const vehicle = new Schema<IVehicle>({
-    user: {
-        type: ObjectId,
-        ref: 'User',
-        required: true
-    },
-    registration: {
-        type: String,
-        required: true,
-        unique: true
-    }
-})
-
-const User = model<UserDocType>('User', user)
-const Parking = model<IParking>('Parking', parking)
-const Place = model<IPlace>('Place', place)
-const Vehicle = model<IVehicle>('Vehicle', vehicle)
-
-export {
-    UserDocType,
-    VehicleDocType,
-    IParking,
-    IPlace,
-    IVehicle,
-
-    User,
-    Parking,
-    Place,
-    Vehicle
-}
+});
+var User = (0, mongoose_1.model)('User', user);
+exports.User = User;
+var Parking = (0, mongoose_1.model)('Parking', parking);
+exports.Parking = Parking;
+var Place = (0, mongoose_1.model)('Place', place);
+exports.Place = Place;

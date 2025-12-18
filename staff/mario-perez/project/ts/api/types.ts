@@ -26,15 +26,20 @@ type Place = {
     vehicleRegistration: String
 }
 
+type Vehicle = {
+    user: ObjectId,
+    registration: String
+}
+
 type Logic = {
-    authenticateUser(username: string, password: string)
-    createPlace(userId: ObjectId, parkingId: ObjectId, level: number, space: string, checkin: Date, checkout: Date, vehicleRegistration: string)
-    deletePlace(userId: ObjectId, placeId: ObjectId)
-    editPlace(userId: ObjectId, placeId: ObjectId, parkingId: ObjectId, level: Number, space: string, checkin: Date, checkout: Date, vehicleRegistration: string)
-    getOnePlace(userId: ObjectId, placeId: ObjectId)
-    getParkings()
-    getUserName(userId: ObjectId, targetUserId: ObjectId)
-    getUserPlaces(userId: ObjectId)
+    authenticateUser(username: string, password: string): Promise<string>
+    //    createPlace(userId: ObjectId, parkingId: ObjectId, level: number, space: string, checkin: Date, checkout: Date, vehicleRegistration: string)
+    //    deletePlace(userId: ObjectId, placeId: ObjectId)
+    //    editPlace(userId: ObjectId, placeId: ObjectId, parkingId: ObjectId, level: Number, space: string, checkin: Date, checkout: Date, vehicleRegistration: string)
+    //    getOnePlace(userId: ObjectId, placeId: ObjectId)
+    //    getParkings()
+    //    getUserName(userId: ObjectId, targetUserId: ObjectId)
+    //    getUserPlaces(userId: ObjectId)
     registerUser(name: string, email: string, username: string, password: string): void
 }
 
@@ -42,5 +47,6 @@ export {
     User,
     Parking,
     Place,
+    Vehicle,
     Logic
 }

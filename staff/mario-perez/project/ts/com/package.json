@@ -1,13 +1,21 @@
 {
-    "name": "com",
-    "version": "1.0.0",
-    "description": "",
-    "type": "module",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
+  "name": "com",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile-watch": "bash -c 'npx tsc --watch'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
 }
