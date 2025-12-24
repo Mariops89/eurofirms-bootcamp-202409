@@ -1,5 +1,3 @@
-import { IPlace, IVehicle } from "../data/models"
-
 type UserType = {
     id: string
     name: string
@@ -11,7 +9,7 @@ type AuthenticateUser = (username: string, password: string) => Promise<string>
 
 type RegisterUser = (name: string, email: string, username: string, password: string) => Promise<void>
 
-type CreatePlace = (parking: string, level: number, space: string, checkin: Date, checkout: Date, user: string, vehicleRegistration: string) => Promise<IPlace>
+type CreatePlace = (parking: string, level: number, space: string, checkin: Date, checkout: Date, user: string, vehicleRegistration: string) => Promise<void>
 
 type CreateVehicleRegistration = (userId: string, registration: string) => Promise<void>
 

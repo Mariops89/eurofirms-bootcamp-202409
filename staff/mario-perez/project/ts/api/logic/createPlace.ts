@@ -30,6 +30,7 @@ export const createPlace: CreatePlace = (parking, level, space, checkin, checkou
             })
 
             return Place.create({ parking: parking, level, space, checkin, checkout, vehicleRegistration })
+                .then(() => { })
                 .catch(error => {
                     if (error.code === 11000) throw new DuplicityError('La plaza no puede crearse')
 

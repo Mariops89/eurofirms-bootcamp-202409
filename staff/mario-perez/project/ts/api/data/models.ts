@@ -1,4 +1,4 @@
-import { Schema, model, Types, ObjectId, FlattenMaps } from "mongoose"
+import { Schema, model, Types, ObjectId } from "mongoose"
 
 // const ObjectId = Types.ObjectId
 const { ObjectId } = Schema.Types
@@ -19,16 +19,19 @@ type VehicleDocType = {
     __v: number
 }
 
-interface IParking {
+type ParkingDocType = {
+    _id: Types.ObjectId
     name: string
     address: string
     city: string
     levels: number
     price: number
     capacity: number
+    __v: number
 }
 
-interface IPlace {
+type PlaceDocType = {
+    _id: Types.ObjectId
     parking: Types.ObjectId
     level: number
     space: string
@@ -37,11 +40,7 @@ interface IPlace {
     user: Types.ObjectId
     vehicleRegistration: string
     free: boolean
-}
-
-interface IVehicle {
-    user: Types.ObjectId
-    registration: string
+    __v: number
 }
 
 const user = new Schema<UserDocType>({
@@ -68,7 +67,7 @@ const user = new Schema<UserDocType>({
         minLength: 8
     }
 })
-const parking = new Schema<IParking>({
+const parking = new Schema<ParkingDocType>({
     name: {
         type: String,
         required: true,
@@ -102,7 +101,7 @@ const parking = new Schema<IParking>({
     }
 })
 
-const place = new Schema<IPlace>({
+const place = new Schema<PlaceDocType>({
     parking: {
         type: ObjectId,
         ref: 'Parking',
@@ -150,7 +149,7 @@ const place = new Schema<IPlace>({
     }
 })
 
-const vehicle = new Schema<IVehicle>({
+const vehicle = new Schema<VehicleDocType>({
     user: {
         type: ObjectId,
         ref: 'User',
@@ -164,16 +163,15 @@ const vehicle = new Schema<IVehicle>({
 })
 
 const User = model<UserDocType>('User', user)
-const Parking = model<IParking>('Parking', parking)
-const Place = model<IPlace>('Place', place)
-const Vehicle = model<IVehicle>('Vehicle', vehicle)
+const Parking = model<ParkingDocType>('Parking', parking)
+const Place = model<PlaceDocType>('Place', place)
+const Vehicle = model<VehicleDocType>('Vehicle', vehicle)
 
 export {
     UserDocType,
     VehicleDocType,
-    IParking,
-    IPlace,
-    IVehicle,
+    ParkingDocType,
+    PlaceDocType,
 
     User,
     Parking,
