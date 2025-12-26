@@ -17,6 +17,16 @@ type PlaceType = {
     vehicleRegistration: string
 }
 
+type ParkingType = {
+    id: string
+    name: string
+    address: string
+    city: string
+    levels: number
+    price: number
+    capacity: number
+}
+
 type AuthenticateUser = (username: string, password: string) => Promise<string>
 
 type RegisterUser = (name: string, email: string, username: string, password: string) => Promise<void>
@@ -29,6 +39,8 @@ type DeletePlace = (placeId: string, userId: string) => Promise<void>
 
 type GetOnePlace = (userId: string, placeId: string) => Promise<PlaceType>
 
+type GetParkings = () => Promise<ParkingType[]>
+
 type Logic = {
     authenticateUser: AuthenticateUser
     registerUser: RegisterUser
@@ -36,6 +48,7 @@ type Logic = {
     createVehicleRegistration: CreateVehicleRegistration
     deletePlace: DeletePlace
     getOnePlace: GetOnePlace
+    getParkings: GetParkings
 }
 
 export {
@@ -45,5 +58,8 @@ export {
     CreateVehicleRegistration,
     DeletePlace,
     GetOnePlace,
-    PlaceType, Logic
+    GetParkings,
+    PlaceType,
+    ParkingType,
+    Logic
 }

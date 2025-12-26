@@ -1,4 +1,4 @@
-Jimport mongoose from "mongoose"
+import mongoose from "mongoose"
 import { createVehicleRegistration } from "./createVehicleRegistration.ts"
 import { expect } from "chai"
 import { Vehicle, User, VehicleDocType } from "../data/models.ts"
